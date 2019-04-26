@@ -6,8 +6,8 @@
 // console.log(testJSON);
 
 $(document).ready(function(){
-	$.get('./python/answerData.json').done(data =>{
-	console.log(data);
+	$.get('./python/answerData.json').done(function(data) {
+		console.log(data)
 	})
 })
 
