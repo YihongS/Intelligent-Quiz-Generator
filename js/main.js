@@ -28,6 +28,34 @@
 	// 	generateHtmlTable(data);
 	//   }   
 	// });
+var question1 = {
+    problemStatement:'Microwaves are electric waves that could NOT penetrate?',
+    optionA:'A. Food',
+    optionB:'B. Ceramics',
+    optionC:'C. Glass',
+    optionD:'D. Metal',
+    correctAnswer:'D. Metal'
+  }
+
+  var question2 = {
+    problemStatement:'How does the microwave heat the food?',
+    optionA:'A. Activating the water molecules in the food',
+    optionB:'B. Heat the air inside the microwave oven.',
+    optionC:'C. Heat the container of the food and then conduct the heat to the food',
+    optionD:'D. Activating all the molecules in the food',
+    correctAnswer:'A. Activating the water molecules in the food'
+  }
+
+
+  var question3 = {
+    problemStatement:'In what order does the microwave heat the food?',
+    optionA:'A. Heat the inside first then the outside',
+    optionB:'B. Heat the outside first then the inside',
+    optionC:'C. Heat all parts at the same time',
+    optionD:'D. Heat in a random order',
+    correctAnswer:'C. Heat all parts at the same time'
+  }
+ var questions = [question1,question2,question3]
 
 
 let countQ = 0;
@@ -35,7 +63,7 @@ let countQ = 0;
 let correctOptions = ['bababa','dadadda','jujujuju'];
 let optionChose = [];
 let questionCorrect = [];
-function clickOption(){
+// function clickOption(){
 	// Define current Choice
 	$('.option').click(function (){
 		// if the clicked option is previously checked, remove it
@@ -47,14 +75,14 @@ function clickOption(){
 			  array.splice(index, 1);
 			}
 		} 
-		// else, check it
+		// if the clicked option is not previously checked, check it
 		else {
 			optionChose.push($(this).text());
 			$(this).addClass('checked')
 		}
 		console.log(optionChose);
-	}
-}
+	})
+// }
 
 // Check if the chosen options are correct
 function checkCorrect(){
@@ -72,30 +100,31 @@ function checkCorrect(){
 				answeredCorrect[i] = false;
 				questionCorrect[countQ] = false;
 			}
-		}
+		})
 		// check if all correct options are chosed
 		$.each(correctOptions, function( i, v ) {
 			if (!optionChose.include(v)) {
 				questionCorrect[countQ] = false;
 			} 
-		}
+		})
 		countQ += 1;
-	}
+	})
 }
 	// try write check all that apply questions
 	// read countQ from JSON ***
+	optionsChoseArray = [];
     optionsChoseArray[countQ] = optionChose;
     // console.log('final'+ optionChose);
     // console.log('optionChose='+ optionChose);
     // console.log('countQ='+countQ);
     if (countQ <= 7 && optionChose == questions[countQ].correctAnswer){
       score = score + 1;
-      questionsCorrect[countQ] = true;
+      questionCorrect[countQ] = true;
       // console.log('score='+ score);
     }
     else{
       // console.log("!===")
-      questionsCorrect[countQ] = false;
+      questionCorrect[countQ] = false;
     }
 
     if(countQ <= 7){

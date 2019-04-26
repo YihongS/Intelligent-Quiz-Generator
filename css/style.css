@@ -1,0 +1,15 @@
+.checked{
+	border-color: green;
+}
+
+.option {
+  display: flex;
+  border: 3px solid grey;
+  cursor: pointer;
+}
+
+button {
+  margin:10px;
+  outline:none;
+  font-color: black;
+}
