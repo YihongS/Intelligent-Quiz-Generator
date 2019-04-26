@@ -5,9 +5,8 @@
 // var testJSON = JSON.parse(answerData);
 // console.log(testJSON);
 
-let root = './TOLQuizGenerator/'
 
-$.get(root + 'python/answerData.json').done(data =>{
+$.get('./python/answerData.json').done(data =>{
 	console.log(data);
 })
 
