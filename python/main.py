@@ -18,7 +18,7 @@ def readAnswers():
 
 def sortByQuizScore(lst):
     new = sorted(lst,key = lambda i: i['Quiz_score'], reverse = True)
-    print("new",new)
+    #print("new",new)
     return new
 
 
@@ -26,7 +26,7 @@ def getCorrectList(lst):
     pool = []
     for item in lst:
         if item["Student_score_on_question"] > 0:
-            pool.append(item["Answer_text"])
+            pool.append((item["Answer_text"], item["Question_id"]))
     return pool
 
 
@@ -38,9 +38,24 @@ def getIncorrectList(lst):
     pool = []
     for item in lst:
         if item["Student_score_on_question"] == 0:
-            pool.append(item["Answer_text"])
-    print(len(pool))
+            pool.append((item["Answer_text"],item["Question_id"]))
+    #print(len(pool))
     return pool
+
+def readQuestions():
+    data = list(csv.reader(open("Questions.csv", mode = "r")))
+    questionResult = []
+    questionHead = data[0]
+    for line in data[1:]:
+        d = {}
+        for i in range(len(questionHead)):
+            if i in [1,5,7,9,11]:
+                line[i] = int(line[i])
+            d[questionHead[i]] = line[i]
+        questionResult.append(d)
+    return questionResult
+
+
 
 
 answerList = readAnswers()
@@ -48,6 +63,7 @@ sortedByQuiz = sortByQuizScore(answerList)
 sortedCorrectPool = getCorrectList(sortedByQuiz)
 sortedByLen = sortByResponseLength(answerList)
 sortedIncorrectPool = getIncorrectList(sortedByLen)
+questionResult = readQuestions()
 
 with open('answerData.json', 'w') as f:
     json.dump(answerList, f)
@@ -57,6 +73,9 @@ with open('correctAnswerByScore.json', 'w') as f:
 
 with open('incorrectAnswerByLen.json', 'w') as f:
     json.dump(sortedIncorrectPool, f)
+
+with open('questionData.json','w') as f:
+    json.dump(questionResult, f)
 
 
 
