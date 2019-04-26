@@ -5,7 +5,7 @@
 // var testJSON = JSON.parse(answerData);
 // console.log(testJSON);
 
-$.get('../python/answerData.json').done(data =>{
+$.get('python/answerData.json').done(data =>{
 	console.log(data);
 })
 
