@@ -5,10 +5,12 @@
 // var testJSON = JSON.parse(answerData);
 // console.log(testJSON);
 
-
-$.get('./python/answerData.json').done(data =>{
+$(document).ready(function(){
+	$.get('./python/answerData.json').done(data =>{
 	console.log(data);
+	})
 })
+
 
 // var correct = [];
 // var incorrect = [];
