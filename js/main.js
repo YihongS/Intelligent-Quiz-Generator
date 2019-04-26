@@ -1,3 +1,14 @@
+// $.getJSON("python/test.json", function(json) {
+//     console.log(json); // this will show the info it in firebug console
+// });
+
+// var testJSON = JSON.parse(answerData);
+// console.log(testJSON);
+
+$.get('../python/answerData.json').done(data =>{
+	console.log(data);
+})
+
 // var correct = [];
 // var incorrect = [];
 // length.
