@@ -46,6 +46,7 @@ def separateAnswerList(pool,numOfQuestions):
                 lst.append(r[0])
         result.append(lst)
     print(result)
+    return result
 
 def sortByResponseLength(lst):
     new = sorted(lst,key = lambda i: len(i['Answer_text']),reverse = True)
@@ -80,7 +81,6 @@ numOfQuestions = getNumOfQuestions(answerList)
 sortedByQuiz = sortByQuizScore(answerList)
 sortedCorrectPool = getCorrectList(sortedByQuiz)
 correctList = separateAnswerList(sortedCorrectPool,numOfQuestions)
-
 sortedByLen = sortByResponseLength(answerList)
 sortedIncorrectPool = getIncorrectList(sortedByLen)
 questionResult = readQuestions()
