@@ -6,9 +6,45 @@
 // console.log(testJSON);
 
 $(document).ready(function(){
-	$.get('./python/answerData.json').done(function(data) {
-		console.log(data)
+	$.get('./python/correctAnswerByScore.json').done(function(ca) {
+		console.log(ca[0])
 	})
+
+	var question1 = {
+	    problemStatement:'Microwaves are electric waves that could NOT penetrate?',
+	    optionA:'A. Food',
+	    optionB:'B. Ceramics',
+	    optionC:'C. Glass',
+	    optionD:'D. Metal',
+	    correctAnswers:['D. Metal','C. Glass']
+  	}
+
+	var question2 = {
+	    problemStatement:'How does the microwave heat the food?',
+	    optionA:'A. Activating the water molecules in the food',
+	    optionB:'B. Heat the air inside the microwave oven.',
+	    optionC:'C. Heat the container of the food and then conduct the heat to the food',
+	    optionD:'D. Activating all the molecules in the food',
+	    correctAnswers:['A. Activating the water molecules in the food']
+	}
+
+
+	var question3 = {
+	    problemStatement:'In what order does the microwave heat the food?',
+	    optionA:'A. Heat the inside first then the outside',
+	    optionB:'B. Heat the outside first then the inside',
+	    optionC:'C. Heat all parts at the same time',
+	    optionD:'D. Heat in a random order',
+	    correctAnswers:['C. Heat all parts at the same time']
+	}
+	var questions = [question1,question2,question3]
+
+
+	let countQ = 0;
+	// read current correctOptions from the correctResponses[countQ] array ***
+	// let correctOptions = ['bababa','dadadda','jujujuju'];
+	let correctOptions = [questions[countQ].correctAnswers];
+	console.log(correctOptions);
 })
 
 
@@ -42,39 +78,42 @@ $(document).ready(function(){
 	// 	generateHtmlTable(data);
 	//   }   
 	// });
+
+// Fake examples pretending the JSON file that I will get
 var question1 = {
     problemStatement:'Microwaves are electric waves that could NOT penetrate?',
     optionA:'A. Food',
     optionB:'B. Ceramics',
     optionC:'C. Glass',
     optionD:'D. Metal',
-    correctAnswer:'D. Metal'
+    correctAnswers:['D. Metal','C. Glass']
   }
 
-  var question2 = {
+var question2 = {
     problemStatement:'How does the microwave heat the food?',
     optionA:'A. Activating the water molecules in the food',
     optionB:'B. Heat the air inside the microwave oven.',
     optionC:'C. Heat the container of the food and then conduct the heat to the food',
     optionD:'D. Activating all the molecules in the food',
-    correctAnswer:'A. Activating the water molecules in the food'
+    correctAnswers:['A. Activating the water molecules in the food']
   }
 
 
-  var question3 = {
+var question3 = {
     problemStatement:'In what order does the microwave heat the food?',
     optionA:'A. Heat the inside first then the outside',
     optionB:'B. Heat the outside first then the inside',
     optionC:'C. Heat all parts at the same time',
     optionD:'D. Heat in a random order',
-    correctAnswer:'C. Heat all parts at the same time'
+    correctAnswers:['C. Heat all parts at the same time']
   }
- var questions = [question1,question2,question3]
+var questions = [question1,question2,question3]
 
 
 let countQ = 0;
 // read current correctOptions from the correctResponses[countQ] array ***
-let correctOptions = ['bababa','dadadda','jujujuju'];
+let correctOptions = [questions[countQ].correctAnswers];
+console.log(correctOptions);
 let optionChose = [];
 let questionCorrect = [];
 // function clickOption(){
