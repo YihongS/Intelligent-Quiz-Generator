@@ -10,42 +10,8 @@ $(document).ready(function(){
 		console.log(ca[0])
 	})
 
-	var question1 = {
-	    problemStatement:'Microwaves are electric waves that could NOT penetrate?',
-	    optionA:'A. Food',
-	    optionB:'B. Ceramics',
-	    optionC:'C. Glass',
-	    optionD:'D. Metal',
-	    correctAnswers:['D. Metal','C. Glass']
-  	}
-
-	var question2 = {
-	    problemStatement:'How does the microwave heat the food?',
-	    optionA:'A. Activating the water molecules in the food',
-	    optionB:'B. Heat the air inside the microwave oven.',
-	    optionC:'C. Heat the container of the food and then conduct the heat to the food',
-	    optionD:'D. Activating all the molecules in the food',
-	    correctAnswers:['A. Activating the water molecules in the food']
-	}
 
 
-	var question3 = {
-	    problemStatement:'In what order does the microwave heat the food?',
-	    optionA:'A. Heat the inside first then the outside',
-	    optionB:'B. Heat the outside first then the inside',
-	    optionC:'C. Heat all parts at the same time',
-	    optionD:'D. Heat in a random order',
-	    correctAnswers:['C. Heat all parts at the same time']
-	}
-	var questions = [question1,question2,question3]
-
-
-	let countQ = 0;
-	// read current correctOptions from the correctResponses[countQ] array ***
-	// let correctOptions = ['bababa','dadadda','jujujuju'];
-	let correctOptions = [questions[countQ].correctAnswers];
-	console.log(correctOptions);
-})
 
 
 // var correct = [];
@@ -119,13 +85,14 @@ let questionCorrect = [];
 // function clickOption(){
 	// Define current Choice
 	$('.option').click(function (){
+		console.log("text is "+$(this).text());
 		// if the clicked option is previously checked, remove it
-		if (optionChose.include($(this).text())) {
+		if (optionChose.includes($(this).text())) {
 			$(this).removeClass('checked');
 			// remove the chose option from the optionChose array
-			let index = array.indexOf($(this).text());
+			let index = optionChose.indexOf($(this).text());
 			if (index > -1) {
-			  array.splice(index, 1);
+			  optionChose.splice(index, 1);
 			}
 		} 
 		// if the clicked option is not previously checked, check it
@@ -186,3 +153,4 @@ function checkCorrect(){
       // console.log('score='+ score);
 
     }
+})
