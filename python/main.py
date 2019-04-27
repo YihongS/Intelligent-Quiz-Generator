@@ -29,10 +29,28 @@ def getCorrectList(lst):
             pool.append((item["Answer_text"], item["Question_id"]))
     return pool
 
+def getNumOfQuestions(answerList):
+    questions = set()
+    for i in range(len(answerList)):
+        d = answerList[i]
+        questions.add(d["Question_id"])
+    print(questions)
+    return questions
+
+def separateAnswerList(pool,numOfQuestions):
+    result = []
+    for i in range(1,len(numOfQuestions) + 1):
+        lst = [i]
+        for r in sortedCorrectPool:
+            if r[1] == i:
+                lst.append(r[0])
+        result.append(lst)
+    print(result)
 
 def sortByResponseLength(lst):
     new = sorted(lst,key = lambda i: len(i['Answer_text']),reverse = True)
     return new
+
 
 def getIncorrectList(lst):
     pool = []
@@ -41,6 +59,8 @@ def getIncorrectList(lst):
             pool.append((item["Answer_text"],item["Question_id"]))
     #print(len(pool))
     return pool
+
+
 
 def readQuestions():
     data = list(csv.reader(open("Questions.csv", mode = "r")))
@@ -55,27 +75,45 @@ def readQuestions():
         questionResult.append(d)
     return questionResult
 
-
-
-
 answerList = readAnswers()
+numOfQuestions = getNumOfQuestions(answerList)
 sortedByQuiz = sortByQuizScore(answerList)
 sortedCorrectPool = getCorrectList(sortedByQuiz)
+correctList = separateAnswerList(sortedCorrectPool,numOfQuestions)
+
 sortedByLen = sortByResponseLength(answerList)
 sortedIncorrectPool = getIncorrectList(sortedByLen)
 questionResult = readQuestions()
+incorrectList = separateAnswerList(sortedIncorrectPool,numOfQuestions)
+
+
 
 with open('answerData.json', 'w') as f:
     json.dump(answerList, f)
+# What it is: This file contains all the information we can get from the answer.csv.
+# Format: an array,containing all the objects (corresponding to each answer), each object has key and value pair, such like (key: Question ID, value: 1)
+
+
 
 with open('correctAnswerByScore.json', 'w') as f:
-    json.dump(sortedCorrectPool, f)
+    json.dump(correctList, f)
+
+# What it is: This file is a pool of correct answers sorted by score
+# Format: an 2D array (meaning array of arrays), each inner array is in format of ["question text...", question ID]
+
 
 with open('incorrectAnswerByLen.json', 'w') as f:
-    json.dump(sortedIncorrectPool, f)
+    json.dump(incorrectList, f)
+
+# What it is: This file is a pool of incorrect answers sorted by length
+# Format: an 2D array (meaning array of arrays), each inner array is in format of ["question text...", question ID]
+
 
 with open('questionData.json','w') as f:
     json.dump(questionResult, f)
+
+# What it is: This file contains all the information we can get from the question.csv.
+# Format: an array,containing all the objects (corresponding to each answer), each object has key and value pair, such like (key: Question ID, value: 1)
 
 
 
