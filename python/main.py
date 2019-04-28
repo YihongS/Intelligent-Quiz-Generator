@@ -21,7 +21,6 @@ def sortByQuizScore(lst):
     #print("new",new)
     return new
 
-
 def getCorrectList(lst):
     pool = []
     for item in lst:
@@ -76,6 +75,27 @@ def readQuestions():
         questionResult.append(d)
     return questionResult
 
+
+def changeLetterToText(questionResult):
+    for i in range(len(questionResult)):
+        d = questionResult[i]
+        caResult = []
+        ca = d["Correct_answer_choice"]
+        caLst = ca.split(",")
+        for j in range(len(caLst)):
+            if caLst[j] == "A":
+                caResult.append(d["Choice_A_text"])
+            if caLst[j] == "B":
+                caResult.append(d["Choice_B_text"])
+            if caLst[j] == "C":
+                caResult.append(d["Choice_C_text"])
+            if caLst[j] == "D":
+                caResult.append(d["Choice_D_text"])
+        d["Correct_answer_choice"] = caResult
+    return questionResult
+
+
+
 answerList = readAnswers()
 numOfQuestions = getNumOfQuestions(answerList)
 sortedByQuiz = sortByQuizScore(answerList)
@@ -83,8 +103,11 @@ sortedCorrectPool = getCorrectList(sortedByQuiz)
 correctList = separateAnswerList(sortedCorrectPool,numOfQuestions)
 sortedByLen = sortByResponseLength(answerList)
 sortedIncorrectPool = getIncorrectList(sortedByLen)
-questionResult = readQuestions()
+questionResult = changeLetterToText(readQuestions())
 incorrectList = separateAnswerList(sortedIncorrectPool,numOfQuestions)
+
+
+
 
 
 
