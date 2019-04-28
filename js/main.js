@@ -128,19 +128,36 @@ function checkCorrect(){
 	})	
 }
 
+function giveFeedback(){
+	// if the student got it correct
+	if (questionCorrect[countQ]) {
+		$('.feedback-text').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question!');
+	} 
+	else {
+		$('.feedback-text').text("Not correct. Let's try again");
+	}
+}
+
 function continueScene(el) {
   var next = $(el).data('next');
   console.log(next);
-  $(el).parent('.scene').fadeOut()
-  
- }
-
+  $(el).parent('.scene').fadeOut();
+  $(next).fadeIn();
+}
 
 $('.btn_submit').click(function (){
 	checkCorrect();
 	console.log("question correct: "+questionCorrect[countQ])
 	countQ += 1;
+	continueScene(this)
+	console.log('go to feedback')
 })
+
+$('.btn_next_question').click(function (){
+	continueScene(this)
+	console.log('back to question')
+})
+
 
 	// try write check all that apply questions
 	// read countQ from JSON ***
