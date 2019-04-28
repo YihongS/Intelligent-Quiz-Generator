@@ -78,14 +78,14 @@ var questions = [question1,question2,question3]
 
 let countQ = 0;
 // read current correctOptions from the correctResponses[countQ] array ***
-let correctOptions = [questions[countQ].correctAnswers];
+let correctOptions = questions[countQ].correctAnswers;
 console.log(correctOptions);
 let optionChose = [];
 let questionCorrect = [];
 // function clickOption(){
 	// Define current Choice
 	$('.option').click(function (){
-		console.log("text is "+$(this).text());
+		console.log("clicked text is "+$(this).text());
 		// if the clicked option is previously checked, remove it
 		if (optionChose.includes($(this).text())) {
 			$(this).removeClass('checked');
@@ -105,15 +105,15 @@ let questionCorrect = [];
 // }
 
 // Check if the chosen options are correct
-function checkCorrect(){
-	let answerCorrect = [];
+// function checkCorrect(){
+	let answeredCorrect = [];
 
 	$('.btn_submit').click(function (){
 		// default setting is true
 		questionCorrect[countQ] = true;
 		// check if the option chosed are correct
 		$.each(optionChose, function( i, v ) {
-			if (correctOptions.include(v)) {
+			if (correctOptions.includes(v)) {
 				answeredCorrect[i] = true;
 			} 
 			else {
@@ -121,15 +121,17 @@ function checkCorrect(){
 				questionCorrect[countQ] = false;
 			}
 		})
+
 		// check if all correct options are chosed
 		$.each(correctOptions, function( i, v ) {
-			if (!optionChose.include(v)) {
+			if (!optionChose.includes(v)) {
 				questionCorrect[countQ] = false;
 			} 
 		})
+		console.log("question correct: "+questionCorrect[countQ])
 		countQ += 1;
 	})
-}
+// }
 	// try write check all that apply questions
 	// read countQ from JSON ***
 	optionsChoseArray = [];
