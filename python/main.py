@@ -41,7 +41,7 @@ def separateAnswerList(pool,numOfQuestions):
     result = []
     for i in range(1,len(numOfQuestions) + 1):
         lst = [i]
-        for r in sortedCorrectPool:
+        for r in pool:
             if r[1] == i:
                 lst.append(r[0])
         result.append(lst)
