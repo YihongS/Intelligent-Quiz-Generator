@@ -16,12 +16,18 @@
 </head>
 <body>
 	<div class="wrapper">
-		<div class="questionPrmpt">Microwaves are electric waves that could NOT penetrate?</div>
-		<button id="optionA" class="option">A. Food</button>
-		<button class="option">B. Ceramics</button>
-		<button class="option">C. Glass</button>
-		<button class="option">D. Metal</button>
-		<button class="btn_submit">submit</button>
+		<div id="scene-question" class = "scene">
+			<div class="questionPrompt">Microwaves are electric waves that could NOT penetrate?</div>
+			<button id="optionA" class="option">A. Food</button>
+			<button class="option">B. Ceramics</button>
+			<button class="option">C. Glass</button>
+			<button class="option">D. Metal</button>
+			<button class="btn_submit" data-next="#scene-feedback">submit</button>
+		</div>
+		<div id="scene-feedback" class = "scene">
+			<p>feedback page</p>
+			<button class="btn_next_question" data-next="#scene-question">next question</button>
+		</div>
 	</div>
 </body>
 </html>

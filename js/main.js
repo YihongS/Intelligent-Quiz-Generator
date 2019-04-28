@@ -82,56 +82,66 @@ let correctOptions = questions[countQ].correctAnswers;
 console.log(correctOptions);
 let optionChose = [];
 let questionCorrect = [];
-// function clickOption(){
-	// Define current Choice
-	$('.option').click(function (){
-		console.log("clicked text is "+$(this).text());
-		// if the clicked option is previously checked, remove it
-		if (optionChose.includes($(this).text())) {
-			$(this).removeClass('checked');
-			// remove the chose option from the optionChose array
-			let index = optionChose.indexOf($(this).text());
-			if (index > -1) {
-			  optionChose.splice(index, 1);
-			}
-		} 
-		// if the clicked option is not previously checked, check it
-		else {
-			optionChose.push($(this).text());
-			$(this).addClass('checked')
+let answeredCorrect = [];
+
+// Define current Choice
+$('.option').click(function (){
+	console.log("clicked text is "+$(this).text());
+	// if the clicked option is previously checked, remove it
+	if (optionChose.includes($(this).text())) {
+		$(this).removeClass('checked');
+		// remove the chose option from the optionChose array
+		let index = optionChose.indexOf($(this).text());
+		if (index > -1) {
+		  optionChose.splice(index, 1);
 		}
-		console.log(optionChose);
-	})
-// }
+	} 
+	// if the clicked option is not previously checked, check it
+	else {
+		optionChose.push($(this).text());
+		$(this).addClass('checked')
+	}
+	console.log(optionChose);
+})
+
 
 // Check if the chosen options are correct
-// function checkCorrect(){
-	let answeredCorrect = [];
-
-	$('.btn_submit').click(function (){
-		// default setting is true
-		questionCorrect[countQ] = true;
-		// check if the option chosed are correct
-		$.each(optionChose, function( i, v ) {
-			if (correctOptions.includes(v)) {
-				answeredCorrect[i] = true;
-			} 
-			else {
-				answeredCorrect[i] = false;
-				questionCorrect[countQ] = false;
-			}
-		})
-
-		// check if all correct options are chosed
-		$.each(correctOptions, function( i, v ) {
-			if (!optionChose.includes(v)) {
-				questionCorrect[countQ] = false;
-			} 
-		})
-		console.log("question correct: "+questionCorrect[countQ])
-		countQ += 1;
+function checkCorrect(){
+	// default setting is true
+	questionCorrect[countQ] = true;
+	// check if the option chosen are correct
+	$.each(optionChose, function( i, v ) {
+		if (correctOptions.includes(v)) {
+			answeredCorrect[i] = true;
+		} 
+		else {
+			answeredCorrect[i] = false;
+			questionCorrect[countQ] = false;
+		}
 	})
-// }
+
+	// check if all correct options are chosen
+	$.each(correctOptions, function( i, v ) {
+		if (!optionChose.includes(v)) {
+			questionCorrect[countQ] = false;
+		} 
+	})	
+}
+
+function continueScene(el) {
+  var next = $(el).data('next');
+  console.log(next);
+  $(el).parent('.scene').fadeOut()
+  
+ }
+
+
+$('.btn_submit').click(function (){
+	checkCorrect();
+	console.log("question correct: "+questionCorrect[countQ])
+	countQ += 1;
+})
+
 	// try write check all that apply questions
 	// read countQ from JSON ***
 	optionsChoseArray = [];
