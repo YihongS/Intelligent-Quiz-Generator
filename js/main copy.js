@@ -93,13 +93,6 @@ let correctOptions = qd[countQ]["Correct_answer_choice"];
 console.log(correctOptions);
 let optionChose = [];
 let questionCorrect = [];
-let answeredCorrect = [];
-
-qPrompts = qd[countQ]["Question_text"]
-oa = qd[countQ]["Choice_A_text"]
-ob = qd[countQ]["Choice_B_text"]
-oc = qd[countQ]["Choice_C_text"]
-od = qd[countQ]["Choice_D_text"]
 
 // Define current Choice
 $('.option').click(function (){
@@ -175,15 +168,28 @@ $('.btn_next_question').click(function (){
 	console.log('back to question')
 })
 
-$(".questionPrompt").text(qPrompts) 
 
-// function changeOption(){ 
-// 	$("#optionA").text(oa) 
-// 	$("#optionB").text(ob) 
-// 	$("#optionC").text(oc) 
-// 	$("#optionD").text(od) 
-// }
+	// try write check all that apply questions
+	// read countQ from JSON ***
+	optionsChoseArray = [];
+    optionsChoseArray[countQ] = optionChose;
+    // console.log('final'+ optionChose);
+    // console.log('optionChose='+ optionChose);
+    // console.log('countQ='+countQ);
+    if (countQ <= 7 && optionChose == questions[countQ].correctAnswer){
+      score = score + 1;
+      questionCorrect[countQ] = true;
+      // console.log('score='+ score);
+    }
+    else{
+      // console.log("!===")
+      questionCorrect[countQ] = false;
+    }
 
-// changeOption()
+    if(countQ <= 7){
+      countQ = countQ + 1;
+      // console.log('countQ='+countQ);
+      // console.log('score='+ score);
 
+    }
 })
