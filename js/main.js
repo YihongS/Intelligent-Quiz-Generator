@@ -84,9 +84,27 @@ $(document).ready(function(){
 	let questionCorrect = [];
 	let answeredCorrect = [];
 
+	function initializeQuestion(){
+		console.log("initialized the question")
+		let correctOptions = questions[countQ].correctAnswers;
+		console.log(correctOptions);
+		let optionChose = [];
+		let questionCorrect = [];
+		let answeredCorrect = [];
+		$('.option').removeClass('checked')
+	}
+
+	function changeQuestion(){
+		$('.questionPrompt').text(questions[countQ].problemStatement)
+		$('#optionA').text(questions[countQ].optionA)
+		$('#optionB').text(questions[countQ].optionB)
+		$('#optionC').text(questions[countQ].optionC)
+		$('#optionD').text(questions[countQ].optionD)
+	}
+
 	// Define current Choice
 	$('.option').click(function (){
-		console.log("clicked text is "+$(this).text());
+		console.log("clicked text is " + $(this).text());
 		// if the clicked option is previously checked, remove it
 		if (optionChose.includes($(this).text())) {
 			$(this).removeClass('checked');
@@ -131,10 +149,10 @@ $(document).ready(function(){
 	function giveFeedback(){
 		// if the student got it correct
 		if (questionCorrect[countQ]) {
-			$('.feedback-text').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question!');
+			$('.feedback-text').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question!')
 		} 
 		else {
-			$('.feedback-text').text("Not correct. Let's try again");
+			$('.feedback-text').text("Not correct. Let's try again")
 		}
 	}
 
@@ -147,7 +165,7 @@ $(document).ready(function(){
 
 	$('.btn_submit').click(function (){
 		checkCorrect();
-		console.log("question correct: "+questionCorrect[countQ])
+		console.log("question correct: " + questionCorrect[countQ])
 		continueScene(this)
 		console.log('go to feedback')
 		giveFeedback()
@@ -155,6 +173,9 @@ $(document).ready(function(){
 	})
 
 	$('.btn_next_question').click(function (){
+		initializeQuestion()
+		// ATTENTION! now it will change question no matter correct or incorrect! NEED TO BE CHANGE!!!!
+		changeQuestion()
 		continueScene(this)
 		console.log('back to question')
 	})
