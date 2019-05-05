@@ -152,10 +152,70 @@ $(document).ready(function(){
 	function differentFeedbacks(){
 		$.each(correctOptions, function( i, v ) {
 			// if the learner didn't choose a correct option
-			// if (!optionChose.includes(v)) {
+			if (!optionChose.includes(v)) {
 				$('.feedback-text-corrective').text('The option "' +correctOptions[i]+'" is correct')
 				console.log("corrective feedback")
-			// }
+			}
+
+		})
+	}
+
+	function changeOptionColors() {
+		console.log('change color')
+		// $.each(optionChose, function( i, v ) {
+		// 	if($('.option').text() == v){
+		// 		$(this).addClass("correct-choice")
+		// 		console.log('correct choice')
+		// 	}
+		// 	else {
+		// 		$(this).addClass("incorrect-choice")
+		// 		console.log('incorrect')
+		// 	}
+		// })
+		// let options = $('.option').text()
+		// console.log('options are'+options)
+		// $.each(options,function(i,v){
+		// 	if (correctOptions.includes(v)) {
+		// 		$(this).addClass("correct-choice")
+		// 		console.log('correct choice')
+		// 	}
+		// 	else{
+		// 		console.log('else')
+		// 	}
+		// })
+		$('.option').each(function(){
+			if (correctOptions.includes($(this).text())) {
+					$(this).addClass("correct-choice")
+					console.log($(this).text()+'is the correct choice')
+				}
+				else{
+					$(this).addClass("incorrect-choice")
+					console.log('else')
+				}
+		})
+	}
+	//@@kx function
+	function changeOptions(){
+		// if current question == answerpool's first element-> question number
+		$.each(ia, function(i,v){
+			if (countQ == ia[i][0]){
+				console.log("you got the question wrong, gonna change options now")
+				// if incorrect answer >= 3, randomly select 0,1,2,3 of incorrect answer
+				if (ia[i].length >=4) {
+          numIncorOpt = Math.floor(Math.random() * 4)
+          console.log("random chose incorrect tobe number ", numIncorOpt)
+          numCorOpt = 4 - numIncorOpt
+          // need to pick out (numIncorOpt) of incorrect answers from the pool
+          // is the next line correct, before the function?
+          $.each(numIncorOpt, function (i, v) {
+              // can we still access ia now?
+              //put it into an array thisIncorOptions
+              thisIncorOpt.push(ia[i])
+              // or should it be ia[i]?
+              ia.splice(0, numIncorOpt)
+          })
+				}
+			}
 		})
 	}
 
@@ -172,7 +232,10 @@ $(document).ready(function(){
 		continueScene(this)
 		console.log('go to feedback')
 		giveFeedback()
+		changeOptionColors()
 		countQ += 1;
+		console.log("question correct: " + typeof questionCorrect+" "+questionCorrect)
+		console.log("question correct1: " + typeof questionCorrect+" "+questionCorrect[1])
 	})
 
 	$('.btn_next_question').click(function (){
@@ -180,7 +243,13 @@ $(document).ready(function(){
 		// ATTENTION! now it will change question no matter correct or incorrect! NEED TO BE CHANGE!!!!
 		console.log("countQ",countQ)
 		console.log("qd_countQ",qd[countQ])
-		changeQuestion()
+		//@@kx
+		if (checkCorrect()){
+			console.log('kkkkkkk')
+			changeOptions()}
+		//@@kx
+		else {changeQuestion()}
+		// changeQuestion()
 		continueScene(this)
 		console.log('back to question')
 	})
