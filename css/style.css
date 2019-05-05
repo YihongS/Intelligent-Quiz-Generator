@@ -1,14 +1,16 @@
-.checked{
-	border-color: green;
-	background-color: grey;
-	border: 3px solid;
-}
+
 
 .option {
   display: flex;
   border: 1px solid;
 	border-color: grey;
 /*  cursor: pointer;*/
+}
+
+.checked{
+	/* border-color: green; */
+	background-color: #E6E6E6;
+	border: 1px solid;
 }
 
 button {
@@ -22,17 +24,16 @@ a {
   margin:10px;
   outline:none;
   font-color: black;
-	border-color: grey;
 }
 
 .correct-choice{
-	background-color: green;
-	/* border-color: green; */
+	/* background-color: green; */
+	border-color: green;
 }
 
 .incorrect-choice{
-	background-color: red;
-	/* border-color: red; */
+	/* background-color: red; */
+	border-color: red;
 }
 
 .border{

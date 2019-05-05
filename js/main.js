@@ -73,9 +73,9 @@ $(document).ready(function(){
 		correctOptions = qd[countQ]["Correct_answer_choice"];
 		console.log(correctOptions);
 		optionChose = [];
-		questionCorrect = [];
+		// questionCorrect = [];
 		answeredCorrect = [];
-		$('.option').removeClass('checked')
+		$('.option').removeClass('checked correct-choice incorrect-choice')
 		$('#scene-feedback').hide()
 	}
 
@@ -141,56 +141,41 @@ $(document).ready(function(){
 	function giveFeedback(){
 		// if the student got it correct
 		if (questionCorrect[countQ]) {
-			$('.feedback-text').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question!')
+			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question!')
 		}
 		else {
-			$('.feedback-text').text("Not correct. Let's try again")
+			$('.correctness').text("Not correct. Let's try again")
 			differentFeedbacks()
 		}
 	}
 
 	function differentFeedbacks(){
+		// console.log("successfully go to different feedbacks")
 		$.each(correctOptions, function( i, v ) {
 			// if the learner didn't choose a correct option
 			if (!optionChose.includes(v)) {
-				$('.feedback-text-corrective').text('The option "' +correctOptions[i]+'" is correct')
-				console.log("corrective feedback")
+				$('.correctness').append("<p class = 'feedback corrective-correct'>You didn't chose the correct option</p>")
+				// $('.corrective-correct').text('The option "' +correctOptions[i]+'" is correct')
+				// console.log("corrective feedback")
 			}
-
+		})
+		// if the learner chose a wrong option
+		$.each(optionChose, function( i, v ) {
+			if (!correctOptions.includes(v)) {
+				$('.correctness').append("<p class = 'feedback corrective-wrong'>the option you chose is wrong</p>")
+			}
 		})
 	}
 
 	function changeOptionColors() {
-		console.log('change color')
-		// $.each(optionChose, function( i, v ) {
-		// 	if($('.option').text() == v){
-		// 		$(this).addClass("correct-choice")
-		// 		console.log('correct choice')
-		// 	}
-		// 	else {
-		// 		$(this).addClass("incorrect-choice")
-		// 		console.log('incorrect')
-		// 	}
-		// })
-		// let options = $('.option').text()
-		// console.log('options are'+options)
-		// $.each(options,function(i,v){
-		// 	if (correctOptions.includes(v)) {
-		// 		$(this).addClass("correct-choice")
-		// 		console.log('correct choice')
-		// 	}
-		// 	else{
-		// 		console.log('else')
-		// 	}
-		// })
 		$('.option').each(function(){
 			if (correctOptions.includes($(this).text())) {
 					$(this).addClass("correct-choice")
-					console.log($(this).text()+'is the correct choice')
+					// console.log($(this).text()+'is the correct choice')
 				}
 				else{
 					$(this).addClass("incorrect-choice")
-					console.log('else')
+					// console.log('else')
 				}
 		})
 	}
@@ -235,16 +220,16 @@ $(document).ready(function(){
 		changeOptionColors()
 		countQ += 1;
 		console.log("question correct: " + typeof questionCorrect+" "+questionCorrect)
-		console.log("question correct1: " + typeof questionCorrect+" "+questionCorrect[1])
 	})
 
 	$('.btn_next_question').click(function (){
 		initializeQuestion()
 		// ATTENTION! now it will change question no matter correct or incorrect! NEED TO BE CHANGE!!!!
-		console.log("countQ",countQ)
-		console.log("qd_countQ",qd[countQ])
+		console.log("countQ= ",countQ)
+		console.log("questionCorrect[countQ]= ",questionCorrect[countQ])
+		console.log("questionCorrect= ",questionCorrect)
 		//@@kx
-		if (checkCorrect()){
+		if (questionCorrect[countQ-1]){
 			console.log('kkkkkkk')
 			changeOptions()}
 		//@@kx
