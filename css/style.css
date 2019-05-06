@@ -1,10 +1,20 @@
+button {
+  margin:10px;
+  outline:none;
+  font-color: black;
+	border-color: grey;
+}
 
+.option-wrapper{
+	margin:10px;
+}
 
 .option {
-  display: flex;
+  margin:10px;
+	display: flex inline;
   border: 1px solid;
 	border-color: grey;
-/*  cursor: pointer;*/
+ 	cursor: pointer;
 }
 
 .checked{
@@ -13,18 +23,7 @@
 	border: 1px solid;
 }
 
-button {
-  margin:10px;
-  outline:none;
-  font-color: black;
-	border-color: grey;
-}
 
-a {
-  margin:10px;
-  outline:none;
-  font-color: black;
-}
 
 .correct-choice{
 	/* background-color: green; */

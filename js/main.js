@@ -58,6 +58,8 @@ $(document).ready(function(){
 	let optionChose = [];
 	let questionCorrect = [];
 	let answeredCorrect = [];
+	let choseOptionNotCorrectLetters = [];
+	let correctOptionNotChoseLetters = [];
 
 
 	let qPrompts = qd[countQ]["Question_text"]
@@ -141,44 +143,86 @@ $(document).ready(function(){
 	function giveFeedback(){
 		// if the student got it correct
 		if (questionCorrect[countQ]) {
-			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question!')
+			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! Keep up with the good rhythm!')
 		}
 		else {
-			$('.correctness').text("Not correct. Let's try again")
-			differentFeedbacks()
+			$('.correctness').text("Not correct. Let's try again! Do you know that your brain will become stronger when you practivce it? Keep up with the good rhythm!")
+			correctiveFeedbacks()
 		}
 	}
 
-	function differentFeedbacks(){
-		// console.log("successfully go to different feedbacks")
-		$.each(correctOptions, function( i, v ) {
-			// if the learner didn't choose a correct option
-			if (!optionChose.includes(v)) {
-				$('.correctness').append("<p class = 'feedback corrective-correct'>You didn't chose the correct option</p>")
-				// $('.corrective-correct').text('The option "' +correctOptions[i]+'" is correct')
-				// console.log("corrective feedback")
+	function correctiveFeedbacks(){
+		findOptionLetter()
+		let correct = correctOptionNotChoseLetters.join(", ")
+		let incorrect = choseOptionNotCorrectLetters.join(", ")
+		if (correct) {
+			if (correctOptionNotChoseLetters.length == 1) {
+				$('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct option " + correct + "</p>")
+			} else {
+				$('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct options " + correct + "</p>")
 			}
-		})
-		// if the learner chose a wrong option
-		$.each(optionChose, function( i, v ) {
-			if (!correctOptions.includes(v)) {
-				$('.correctness').append("<p class = 'feedback corrective-wrong'>the option you chose is wrong</p>")
+			// $('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct option(s) " + correct + "</p>")
+		}
+		if (incorrect) {
+			if (choseOptionNotCorrectLetters.length == 1) {
+				$('.correctness').append("<p class = 'feedback corrective-wrong'>the option " + incorrect + " you chose is wrong</p>")
+			} else {
+				$('.correctness').append("<p class = 'feedback corrective-wrong'>the options " + incorrect + " you chose are wrong</p>")
 			}
-		})
+			// $('.correctness').append("<p class = 'feedback corrective-wrong'>the option(s) " + incorrect + " you chose is/are wrong</p>")
+		}
 	}
 
 	function changeOptionColors() {
 		$('.option').each(function(){
 			if (correctOptions.includes($(this).text())) {
-					$(this).addClass("correct-choice")
-					// console.log($(this).text()+'is the correct choice')
-				}
-				else{
-					$(this).addClass("incorrect-choice")
-					// console.log('else')
-				}
+				$(this).addClass("correct-choice")
+				// console.log($(this).text()+'is the correct choice')
+			}
+			else{
+				$(this).addClass("incorrect-choice")
+				// let optionToPush = $(this).siblings('.option-letter').text()
+				// ChoseOptionNotCorrectLetters.push(optionToPush)
+				// console.log("ChoseOptionNotCorrectLetters is ", ChoseOptionNotCorrectLetters)
+				// console.log('else')
+			}
 		})
 	}
+
+	function findOptionLetter() {
+		$('.option').each(function(){
+			let optionToPush
+			// console.log("correctOptions= ",correctOptions)
+			// console.log("optionChoses= ",optionChose)
+			// console.log("$(this).text()= ",$(this).text())
+			// console.log("correctOptions.includes($(this).text()) is true??: ",correctOptions.includes($(this).text()))
+			// console.log("optionChose.includes($(this).text()) is true??: ",optionChose.includes($(this).text()))
+
+			// if this is a corect option and the learner didn't choose
+			if ((correctOptions.includes($(this).text())) && (!optionChose.includes($(this).text()))) {
+				optionToPush = $(this).siblings('.option-letter').text()
+				correctOptionNotChoseLetters.push(optionToPush)
+				// console.log($(this).text()+'is the correct choice')
+			}
+			// if chosen answer is incorrect
+			else if (!correctOptions.includes($(this).text()) && (optionChose.includes($(this).text()))) {
+				optionToPush = $(this).siblings('.option-letter').text()
+				choseOptionNotCorrectLetters.push(optionToPush)
+				// console.log("should have added to choseOptionNotCorrectLetters")
+			}
+			else{
+				// console.log("not find anything")
+			}
+			// {
+			// 	$(this).addClass("incorrect-choice")
+			// 	optionToPush = $(this).siblings('.option-letter').text()
+			// 	ChoseOptionNotCorrectLetters.push(optionToPush)
+			// 	console.log("ChoseOptionNotCorrectLetters is ", ChoseOptionNotCorrectLetters)
+			// 	// console.log('else')
+			// }
+		})
+	}
+
 	//@@kx function
 	function changeOptions(){
 		// if current question == answerpool's first element-> question number
@@ -216,8 +260,8 @@ $(document).ready(function(){
 		console.log("question correct: " + questionCorrect[countQ])
 		continueScene(this)
 		console.log('go to feedback')
-		giveFeedback()
 		changeOptionColors()
+		giveFeedback()
 		countQ += 1;
 		console.log("question correct: " + typeof questionCorrect+" "+questionCorrect)
 	})
