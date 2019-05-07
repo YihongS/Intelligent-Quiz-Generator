@@ -17,8 +17,11 @@ button {
  	cursor: pointer;
 }
 
+.disabled-button{
+  cursor:default;
+}
+
 .checked{
-	/* border-color: green; */
 	background-color: #E6E6E6;
 	border: 1px solid;
 }

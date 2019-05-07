@@ -11,7 +11,7 @@
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script> -->
 	<script type="text/javascript" src="js/jquery.csv.min.js"></script>
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
-	<script type="text/javascript" src="python/answerData.json"></script>
+	<!-- <script type="text/javascript" src="python/answerData.json"></script> -->
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -36,11 +36,16 @@
 			</div>
 
 			<button class="btn_submit" data-next="#scene-feedback">submit</button>
+			<button class="btn_newQ">This question seems off, I want a new one. <br>(you can request this 5 times.)</button>
+			<p class="game-system">You have requested for new questions too many times, please try to solve the question.</p>
 		</div>
 		<div id="scene-feedback" class = "scene">
 			<p class = "feedback correctness">feedback text</p>
 			<!-- <p class = "feedback correct">corrective feedback text</p> -->
 			<button class="btn_next_question" data-next="#scene-question">next question</button>
+		</div>
+		<div id="scene-finish" class="scene">
+			<p class="finish-text">You are finished with the quiz, thank you for your hard work!</p>
 		</div>
 	</div>
 </body>

@@ -1,7 +1,10 @@
 // $.getJSON("python/test.json", function(json) {
 //     console.log(json); // this will show the info it in firebug console
 // });
-
+let qd = []
+let ad = []
+let ca = []
+let ia = []
 
 $.get('./python/questionData.json').done(function(data) {
 	qd = data
@@ -9,12 +12,24 @@ $.get('./python/questionData.json').done(function(data) {
 $.get('./python/answerData.json').done(function(data) {
 	ad = data
 })
-$.get('./python/correctAnswerByScore.json').done(function(data) {
-	ca = data
-})
+// $.get('./python/correctAnswerByScore.json').done(function(data) {
+// 	ca = data
+// 	console.log("calength= ", ca.length)
+// })
 $.get('./python/incorrectAnswerByLen.json').done(function(data) {
 	ia = data
 })
+
+
+$.ajax({
+    url: './python/correctAnswerByScore.json',
+    dataType: 'json',
+    // data: data,
+    async: false,
+    success: function(data){
+			ca = data
+    }
+});
 
 $(document).ready(function(){
 	let countQ = 0;
@@ -34,7 +49,10 @@ $(document).ready(function(){
 	let thisIncorOpt = [];
 	let thisCorOpt = [];
 	let hasAdded = false
+	let timeClicked = 0
+	let inFeedback = false
 	initializeQuestion()
+	console.log("changeQuestion()")
 	changeQuestion()
 
 	function initializeQuestion(){
@@ -47,43 +65,64 @@ $(document).ready(function(){
 		choseOptionNotCorrectLetters = []
 		$('.option').removeClass('checked correct-choice incorrect-choice')
 		$('#scene-feedback').hide()
+		$('#scene-finish').hide()
+		$(".game-system").hide()
 	}
 
 	function changeQuestion(){
-		console.log("changeQuestion!!",countQ,qd[countQ])
-		correctOptions = qd[countQ]["Correct_answer_choice"];
-		qPrompts = qd[countQ]["Question_text"]
-		oa = qd[countQ]["Choice_A_text"]
-		ob = qd[countQ]["Choice_B_text"]
-		oc = qd[countQ]["Choice_C_text"]
-		od = qd[countQ]["Choice_D_text"]
-		$('.questionPrompt').text(qPrompts)
-		$('#optionA').text(oa)
-		$('#optionB').text(ob)
-		$('#optionC').text(oc)
-		$('#optionD').text(od)
-		hasAdded = false
+		if (countQ <= ca.length-1) {
+			console.log("changeQuestion!!",countQ,qd[countQ])
+			correctOptions = qd[countQ]["Correct_answer_choice"];
+			qPrompts = qd[countQ]["Question_text"]
+			oa = qd[countQ]["Choice_A_text"]
+			ob = qd[countQ]["Choice_B_text"]
+			oc = qd[countQ]["Choice_C_text"]
+			od = qd[countQ]["Choice_D_text"]
+			$('.questionPrompt').text(qPrompts)
+			$('#optionA').text(oa)
+			$('#optionB').text(ob)
+			$('#optionC').text(oc)
+			$('#optionD').text(od)
+			hasAdded = false
+		}
+		else{
+			console.log("change question will return~")
+			return
+		}
 	}
+
+	// function disableOptions(){
+	// 	$(".option").attr("disabled",true)
+	// }
+	//
+	// function enableOptions(){
+	// 	$(".option").attr("disabled",false)
+	// }
 
 
 	// Define current Choice
 	$('.option').click(function (){
-		console.log("clicked text is " + $(this).text());
-		// if the clicked option is previously checked, remove it
-		if (optionChose.includes($(this).text())) {
-			$(this).removeClass('checked');
-			// remove the chose option from the optionChose array
-			let index = optionChose.indexOf($(this).text());
-			if (index > -1) {
-			  optionChose.splice(index, 1);
+		if (!inFeedback) {
+			console.log("clicked text is " + $(this).text());
+			// if the clicked option is previously checked, remove it
+			if (optionChose.includes($(this).text())) {
+				$(this).removeClass('checked');
+				// remove the chose option from the optionChose array
+				let index = optionChose.indexOf($(this).text());
+				if (index > -1) {
+				  optionChose.splice(index, 1);
+				}
 			}
+			// if the clicked option is not previously checked, check it
+			else {
+				optionChose.push($(this).text());
+				$(this).addClass('checked')
+			}
+			console.log(optionChose);
 		}
-		// if the clicked option is not previously checked, check it
-		else {
-			optionChose.push($(this).text());
-			$(this).addClass('checked')
+		else{
+			console.log("cannot change options now")
 		}
-		console.log(optionChose);
 	})
 
 
@@ -110,7 +149,14 @@ $(document).ready(function(){
 		})
 	}
 
+	function hideSubmit(){
+		$(".btn_submit").hide()
+		$(".btn_newQ").hide()
+	}
+
 	function giveFeedback(){
+		inFeedback = true
+		$(".option").addClass("disabled-button")
 		// if the student got it correct
 		if (questionCorrect[countQ]) {
 			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! Keep up with the good rhythm!')
@@ -189,7 +235,6 @@ $(document).ready(function(){
 	    array[currentIndex] = array[randomIndex];
 	    array[randomIndex] = temporaryValue;
 	  }
-
 	  return array;
 	}
 	//@@kx function
@@ -337,40 +382,80 @@ $(document).ready(function(){
 	  var next = $(el).data('next');
 	  console.log(next);
 	  // $(el).parent('.scene').fadeOut();
-	  $(next).fadeIn();
+	  // is the last
+		console.log(countQ == ca.length,"see if countQ == ca.length")
+		if (countQ == ca.length) {
+			console.log("countQ == ca.length,finished!!")
+			finishScene()
+		}
+		else{
+			// not the last
+			$(next).fadeIn();
+			console.log("not finished")
+		}
 	}
 
+	function finishScene(){
+		$('#scene-feedback').fadeOut()
+		console.log("finish!!!")
+		$('#scene-question').fadeOut()
+		$('#scene-finish').fadeIn();
+	}
+
+	//@@@@@@@kx 0506
+	$('.btn_newQ').click(function (){
+		if(timeClicked <=3)
+		{changeOptions()
+		timeClicked += 1}
+		else {
+			$(".game-system").show()
+			$(".btn_newQ").hide()
+		}
+	})
+
 	$('.btn_submit').click(function (){
+		//hide game system text
+		$(".game-system").hide()
 		checkCorrect();
 		console.log("question correct: " + questionCorrect[countQ])
 		continueScene(this)
 		console.log('go to feedback')
 		changeOptionColors()
 		giveFeedback()
+		//@@@@@kx 0506
+		hideSubmit()
+		disableOptions()
 		console.log("question correct: " + typeof questionCorrect+" "+questionCorrect)
 	})
 
 	$('.btn_next_question').click(function (){
+		//@@@@@@ kexin0506
+		// if it is the last question, go to the finish scene
 		initializeQuestion()
+		inFeedback = false
+		$(".option").removeClass("disabled-button")
 		// ATTENTION! now it will change question no matter correct or incorrect! NEED TO BE CHANGE!!!!
 		console.log("countQ= ",countQ)
 		console.log("questionCorrect[countQ]= ",questionCorrect[countQ])
 		console.log("questionCorrect= ",questionCorrect)
-		//@@kx
 		if (questionCorrect[countQ]==false){
 			//console.log('kkkkkkk'+questionCorrect[countQ-1]);
 			changeOptions()
 		}
-		//@@kx
 		else {
 			countQ+=1
-			console.log("AAAAAAAAAAAAAAAAAA you are right, now come to question", countQ)
 			//if (countQ==0){countQ+= 1}
 			//countQ += 1
 			changeQuestion()
+		}
+		//@@@@@@ kexin0506
+		$(".btn_submit").fadeIn()
+		if (timeClicked <= 3) {
+			$(".btn_newQ").fadeIn()
 		}
 		continueScene(this)
 		console.log('back to question')
 	})
 
 })
+// },5000)
