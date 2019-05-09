@@ -1,12 +1,13 @@
 html{
-	font-family: "muli",sans-serif;
+	font-family: "muli",Helvetica,sans-serif;
 }
 
 .wrapper{
 	width:1120px;
 	min-height:800px;
 	margin:50px auto;
-	background: #E8E8E8;
+	background: #F8F8F8;
+	border-radius: 16px;
 }
 
 button {
@@ -17,9 +18,13 @@ button {
 	border-color: grey;
 }
 .scene{
-	padding:50px 100px 20px 100px;
+	padding:50px 100px 10px 100px;
 	/* background-color: grey; */
 	/* margin: 50px auto; */
+}
+
+#scene-feedback{
+	padding-top:10px;
 }
 
 .question-prompt{
@@ -66,6 +71,18 @@ button{
 	border-color: #0F1A59;
 }
 
+.btn_next_question{
+	margin: 50px auto;
+	text-align:center;
+	display: flex;
+	justify-content: center;
+	font-weight: bold;
+	color:#ffffff;
+	font-family: "Merriweather";
+	background-color: #0F1A59;
+	border-color: #0F1A59;
+}
+
 .feedback{
 	margin: 10px auto;
 	text-align: center;
@@ -73,11 +90,11 @@ button{
 	justify-content: center;
 }
 
-.btn_next_question{
-	margin: 10px auto;
-	text-align:center;
+.game-system{
+	margin: 0 auto;
 	display: flex;
 	justify-content: center;
+	color: #0F1A59;
 }
 
 .option-wrapper{
@@ -86,7 +103,7 @@ button{
 	margin:10px auto;
 	border-radius: 8px;
 	display: flex;
-  border: 2px solid grey;
+  border: 2px solid #D8D8D8;
   background: white;
   cursor: pointer;
 	/* text-align: center; */
@@ -115,8 +132,9 @@ button{
 }
 
 .checked{
-	background-color: #E6E6E6;
+	background-color: #D6D6D6;
 	border: 2px solid;
+	border-color: #0F1A59;
 }
 
 .border{
@@ -125,12 +143,12 @@ button{
 
 .correct-choice{
 	/* background-color: green; */
-	border-color: green;
+	border-color: #58736B;
 }
 
 .incorrect-choice{
 	/* background-color: red; */
-	border-color: red;
+	border-color: #D9736A;
 }
 
 .tooltip {
@@ -179,4 +197,20 @@ button{
   opacity: 1;
 	padding: 10px;
 
+}
+
+.cong-text{
+	margin:50px auto;
+	display: flex;
+  justify-content: center;
+	font-size: 1.5em;
+	font-weight: bold;
+	color:#0F1A59;
+	font-family: "Merriweather"
+}
+
+.finish-text{
+	/* margin: 50px auto; */
+	display: flex;
+  justify-content: center;
 }

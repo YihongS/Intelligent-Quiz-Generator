@@ -164,10 +164,10 @@ $(document).ready(function(){
 		$(".option").addClass("disabled-button")
 		// if the student got it correct
 		if (questionCorrect[countQ]) {
-			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! Keep up with the good rhythm!')
+			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! \nKeep up with the good rhythm!')
 		}
 		else {
-			$('.correctness').text("Not correct. Let's try again! \nDo you know that your brain will become stronger when you practivce it? Keep up with the good rhythm!")
+			$('.correctness').text("Not correct. Let's try again! \nDo you know that your brain will become stronger when you practice it? \nKeep up with the good rhythm!")
 			correctiveFeedbacks()
 		}
 	}
