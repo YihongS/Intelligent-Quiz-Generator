@@ -2,7 +2,7 @@ import csv
 import json
 
 def readAnswers():
-    data = list(csv.reader(open('Answers_data_prj3_validation - Answer_data.csv', mode='r')))
+    data = list(csv.reader(open('Answers.csv', mode='r')))
     answerResult = []
     answerHead = data[0]
     for line in data[1:]:
@@ -61,7 +61,7 @@ def getIncorrectList(lst):
     #print(len(pool))
     return pool
 def readQuestions():
-    data = list(csv.reader(open("Questions_data_prj3_validation - Question_data.csv", mode = "r")))
+    data = list(csv.reader(open("Questions.csv", mode = "r")))
     questionResult = []
     questionHead = data[0]
     for line in data[1:]:
