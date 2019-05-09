@@ -71,6 +71,8 @@ $(document).ready(function(){
 		$('#scene-feedback').hide()
 		$('#scene-finish').hide()
 		$(".game-system").hide()
+		$(".feedback-wrapper").empty()
+		$(".feedback-wrapper").append("<div class = 'feedback correctness'>initialized feedback</div>")
 	}
 
 	function changeQuestion(){
@@ -164,10 +166,11 @@ $(document).ready(function(){
 		$(".option").addClass("disabled-button")
 		// if the student got it correct
 		if (questionCorrect[countQ]) {
-			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! \nKeep up with the good rhythm!')
+			// $('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! \nKeep up with the good rhythm!')
+			$('.correctness').html("<p class='correctness-correct'>Correct!</p> <p>Your hardwork of studying has paid off, now let’s go on to the next question! <br/>Keep up with the good rhythm!<p>");
 		}
 		else {
-			$('.correctness').text("Not correct. Let's try again! \nDo you know that your brain will become stronger when you practice it? \nKeep up with the good rhythm!")
+			$('.correctness').html("<p class='correctness-wrong'>Not correct. Let's try again!</p><p>Do you know that your brain will become stronger when you practice it? </br>Keep up with the good rhythm!</p>")
 			correctiveFeedbacks()
 		}
 	}
@@ -177,18 +180,22 @@ $(document).ready(function(){
 		let correct = correctOptionNotChoseLetters.join(", ")
 		let incorrect = choseOptionNotCorrectLetters.join(", ")
 		if (correct) {
+			$(".btn_next_question").text("Next Question")
+			// See if it's plural
 			if (correctOptionNotChoseLetters.length == 1) {
-				$('.correctness').append("<p class = 'feedback corrective-correct'>\nYou didn't choose the correct option " + correct + "</p>")
+				$('.correctness').parent().append("<p class = 'feedback corrective-correct'>You didn't choose the correct option " + correct + "</p>")
 			} else {
-				$('.correctness').append("<p class = 'feedback corrective-correct'>\nYou didn't choose the correct options " + correct + "</p>")
+				$('.correctness').parent().append("<p class = 'feedback corrective-correct'>\nYou didn't choose the correct options " + correct + "</p>")
 			}
 			// $('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct option(s) " + correct + "</p>")
 		}
 		if (incorrect) {
+			$(".btn_next_question").text("Try Again")
+			// See if it's plural
 			if (choseOptionNotCorrectLetters.length == 1) {
-				$('.correctness').append("<p class = 'feedback corrective-wrong'>\nthe option " + incorrect + " you chose is wrong</p>")
+				$('.correctness').parent().append("<p class = 'feedback corrective-wrong'>\nThe option " + incorrect + " you chose is wrong</p>")
 			} else {
-				$('.correctness').append("<p class = 'feedback corrective-wrong'>\nthe options " + incorrect + " you chose are wrong</p>")
+				$('.correctness').parent().append("<p class = 'feedback corrective-wrong'>\nThe options " + incorrect + " you chose are wrong</p>")
 			}
 			// $('.correctness').append("<p class = 'feedback corrective-wrong'>the option(s) " + incorrect + " you chose is/are wrong</p>")
 		}
@@ -404,7 +411,7 @@ $(document).ready(function(){
 	}
 
 	function finishScene(){
-		$('#scene-feedback').fadeOut()
+		$('#scene-feedback').hide()
 		console.log("finish!!!")
 		$('#scene-question').fadeOut()
 		$('#scene-finish').fadeIn();

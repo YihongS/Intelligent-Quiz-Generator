@@ -36,16 +36,17 @@
 				<span class="option-letter">D</span>
 				<span id="optionD" class="option">Metal</span>
 			</div>
+			<p class="game-system">You have requested for new questions too many times, please try to solve the question.</p>
 			<div class="button-wrapper">
 				<button class="btn_submit" data-next="#scene-feedback">Submit</button>
 				<button class="btn_newQ tooltip">This question seems off, I want a new one.<span class="tooltiptext">you can request this 5 times</span></button>
 			</div>
-			<p class="game-system">You have requested for new questions too many times, please try to solve the question.</p>
 		</div>
 		<div id="scene-feedback" class = "scene">
-			<p class = "feedback correctness">feedback text</p>
-			<!-- <p class = "feedback correct">corrective feedback text</p> -->
-			<button class="btn_next_question" data-next="#scene-question">Next question</button>
+			<div class="feedback-wrapper">
+				<div class = "feedback correctness">feedback text</div>
+			</div>
+			<button class="btn_next_question" data-next="#scene-question">Next Question</button>
 		</div>
 		<div id="scene-finish" class="scene">
 			<p class="cong-text">Congratulations!</p>

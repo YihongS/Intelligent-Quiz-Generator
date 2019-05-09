@@ -2,12 +2,17 @@
 
 html{
 	font-family: "muli",Helvetica,sans-serif;
+	line-height: 1.4em;
+}
+
+p{
+	margin:0;
 }
 
 .wrapper{
 	width:1120px;
-	min-height:800px;
-	margin:50px auto;
+	min-height:940px;
+	margin:10px auto;
 	background: #F8F8F8;
 	border-radius: 16px;
 }
@@ -74,7 +79,7 @@ button{
 }
 
 .btn_next_question{
-	margin: 50px auto;
+	margin: 50px auto 30px auto;
 	text-align:center;
 	display: flex;
 	justify-content: center;
@@ -88,8 +93,8 @@ button{
 .feedback{
 	margin: 10px auto;
 	text-align: center;
-	display: flex;
-	justify-content: center;
+	/* display: flex;
+	justify-content: center; */
 }
 
 .game-system{
@@ -109,7 +114,7 @@ button{
   background: white;
   cursor: pointer;
 	/* text-align: center; */
-	justify-content: center;
+	/* justify-content: center; */
 	padding: 10px 20px;
   /* vertical-align: middle; */
 	/* flex-direction: column; */
@@ -199,6 +204,22 @@ button{
   opacity: 1;
 	padding: 10px;
 
+}
+
+.correctness-correct{
+	font-size: 1.5em;
+	font-weight: bold;
+	color:#0F1A59;
+	font-family: "Merriweather";
+	padding-bottom: 20px;
+}
+
+.correctness-wrong{
+	font-size: 1.5em;
+	font-weight: bold;
+	color:#0F1A59;
+	font-family: "Merriweather";
+	padding-bottom: 20px;
 }
 
 .cong-text{
