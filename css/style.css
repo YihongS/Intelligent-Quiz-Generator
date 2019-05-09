@@ -23,6 +23,7 @@ button {
   font-color: black;
 	font-size: 1em;
 	border-color: grey;
+	font-family: "muli",Helvetica,sans-serif;
 }
 .scene{
 	padding:50px 100px 10px 100px;
