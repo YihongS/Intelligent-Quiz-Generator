@@ -2,10 +2,10 @@
 
 We host our code on github: https://github.com/YihongS/TOLQuizGenerator
 
-## Where each of codes are:
-The responses sorting function is written in Python, please find the main .py file in the "pyhton" folder.
+## Where each code lives:
+The responses sorting function is written in Python, please find the main.py file in the "pyhton" folder.
 
-The question retaking functions are written in Javascript, please find the main .js file in the "js" folder.
+The question retaking functions are written in Javascript, please find the main.js file in the "js" folder.
 
 ## If you want to change the questions and responce csv input, please:
 
