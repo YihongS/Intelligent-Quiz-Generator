@@ -1,20 +1,77 @@
+.wrapper{
+	width:1120px;
+	height:800px;
+	margin:200px auto;
+	background: grey;
+}
+
 button {
   margin:10px;
   outline:none;
   font-color: black;
 	border-color: grey;
 }
-
-.option-wrapper{
-	margin:10px;
+.scene{
+	padding:100px;
+	/* background-color: grey; */
+	/* margin: 50px auto; */
 }
 
+.question-prompt{
+	width: 800px;
+	margin: 40px auto;
+}
+
+.question-title{
+	display: flex;
+  justify-content: center;
+}
+
+.button-wrapper{
+	display:flex;
+	width: 800px;
+	margin: 40px auto;
+	text-align: center;
+	justify-content: center;
+}
+
+button{
+	width: 150px;
+	height: 50px;
+	margin:10px 10px;
+	border-radius: 8px;
+	border: 2px solid grey;
+  background: white;
+	cursor: pointer;
+}
+
+.option-wrapper{
+	width: 800px;
+	min-height: 50px;
+	margin:10px auto;
+	border-radius: 8px;
+	display: flex;
+  border: 2px solid grey;
+  background: white;
+  cursor: pointer;
+	text-align: center;
+	justify-content: center;
+  /* vertical-align: middle; */
+	/* flex-direction: column; */
+	align-items: center;
+  /* width: 740px; */
+  /* height: auto; */
+}
+
+.option-letter{
+	/* margin:10px 0; */
+	display: flex inline-block;
+}
 .option {
   margin:10px;
-	display: flex inline;
-  border: 1px solid;
-	border-color: grey;
- 	cursor: pointer;
+	display: flex inline-block;
+	/* flex-direction: column;
+  align-items: center; */
 }
 
 .disabled-button{
@@ -23,10 +80,8 @@ button {
 
 .checked{
 	background-color: #E6E6E6;
-	border: 1px solid;
+	border: 2px solid;
 }
-
-
 
 .correct-choice{
 	/* background-color: green; */
@@ -45,25 +100,25 @@ button {
 .tooltip {
   position: relative;
   display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+  /* border-bottom: 1px dotted black; /* If you want dots under the hoverable text */ */
 }
 
 /* Tooltip text */
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
+  width: 180px;
+  background-color: white;
+  color: black;
   text-align: center;
   padding: 5px 0;
-  border-radius: 6px;
+  border-radius: 8px;
 
   /* Position the tooltip text */
   position: absolute;
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -80px;
 
   /* Fade in tooltip */
   opacity: 0;
@@ -79,11 +134,13 @@ button {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: white transparent transparent transparent;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+	padding: 10px;
+
 }

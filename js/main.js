@@ -8,6 +8,7 @@ let ia = []
 
 $.get('./python/questionData.json').done(function(data) {
 	qd = data
+	console.log(qd)
 })
 $.get('./python/answerData.json').done(function(data) {
 	ad = data
@@ -18,17 +19,19 @@ $.get('./python/answerData.json').done(function(data) {
 // })
 $.get('./python/incorrectAnswerByLen.json').done(function(data) {
 	ia = data
+	console.log(ia)
 })
 
 
 $.ajax({
-    url: './python/correctAnswerByScore.json',
-    dataType: 'json',
-    // data: data,
-    async: false,
-    success: function(data){
-			ca = data
-    }
+  url: './python/correctAnswerByScore.json',
+  dataType: 'json',
+  // data: data,
+  async: false,
+  success: function(data){
+		ca = data
+		console.log(ca)
+  }
 });
 
 $(document).ready(function(){
@@ -63,7 +66,8 @@ $(document).ready(function(){
 		answeredCorrect = [];
 		correctOptionNotChoseLetters = []
 		choseOptionNotCorrectLetters = []
-		$('.option').removeClass('checked correct-choice incorrect-choice')
+		$(".question-number").text(countQ+1)
+		$('.option-wrapper').removeClass('checked correct-choice incorrect-choice')
 		$('#scene-feedback').hide()
 		$('#scene-finish').hide()
 		$(".game-system").hide()
@@ -78,7 +82,7 @@ $(document).ready(function(){
 			ob = qd[countQ]["Choice_B_text"]
 			oc = qd[countQ]["Choice_C_text"]
 			od = qd[countQ]["Choice_D_text"]
-			$('.questionPrompt').text(qPrompts)
+			$('.question-prompt').text(qPrompts)
 			$('#optionA').text(oa)
 			$('#optionB').text(ob)
 			$('#optionC').text(oc)
@@ -101,21 +105,21 @@ $(document).ready(function(){
 
 
 	// Define current Choice
-	$('.option').click(function (){
+	$('.option-wrapper').click(function (){
 		if (!inFeedback) {
-			console.log("clicked text is " + $(this).text());
+			console.log("clicked text is " + $(this).children(".option").text());
 			// if the clicked option is previously checked, remove it
-			if (optionChose.includes($(this).text())) {
+			if (optionChose.includes($(this).children(".option").text())) {
 				$(this).removeClass('checked');
 				// remove the chose option from the optionChose array
-				let index = optionChose.indexOf($(this).text());
+				let index = optionChose.indexOf($(this).children(".option").text());
 				if (index > -1) {
 				  optionChose.splice(index, 1);
 				}
 			}
 			// if the clicked option is not previously checked, check it
 			else {
-				optionChose.push($(this).text());
+				optionChose.push($(this).children(".option").text());
 				$(this).addClass('checked')
 			}
 			console.log(optionChose);
@@ -229,7 +233,6 @@ $(document).ready(function(){
 	    // Pick a remaining element...
 	    randomIndex = Math.floor(Math.random() * currentIndex);
 	    currentIndex -= 1;
-
 	    // And swap it with the current element.
 	    temporaryValue = array[currentIndex];
 	    array[currentIndex] = array[randomIndex];
@@ -303,7 +306,11 @@ $(document).ready(function(){
 						pushOriginal()
 					}
 					if ((ca[i].length<3) || (ia[i].length<2)) {
-        		countQ+=1;changeQuestion();console.log("GOING TO return!");return
+        		countQ+=1;
+						changeQuestion();
+						$(".question-number").text(countQ+1)
+						console.log("GOING TO return!");
+						return
 						console.log("you got the question wrong, gonna change options now:>=4?????:",ia[i].length)
         	}
 
@@ -404,9 +411,11 @@ $(document).ready(function(){
 
 	//@@@@@@@kx 0506
 	$('.btn_newQ').click(function (){
-		if(timeClicked <=3)
-		{changeOptions()
-		timeClicked += 1}
+		if(timeClicked <=3){
+			initializeQuestion()
+			changeOptions()
+			timeClicked += 1
+		}
 		else {
 			$(".game-system").show()
 			$(".btn_newQ").hide()
@@ -424,7 +433,6 @@ $(document).ready(function(){
 		giveFeedback()
 		//@@@@@kx 0506
 		hideSubmit()
-		disableOptions()
 		console.log("question correct: " + typeof questionCorrect+" "+questionCorrect)
 	})
 
@@ -433,7 +441,7 @@ $(document).ready(function(){
 		// if it is the last question, go to the finish scene
 		initializeQuestion()
 		inFeedback = false
-		$(".option").removeClass("disabled-button")
+		$(".option-wrapper").removeClass("disabled-button")
 		// ATTENTION! now it will change question no matter correct or incorrect! NEED TO BE CHANGE!!!!
 		console.log("countQ= ",countQ)
 		console.log("questionCorrect[countQ]= ",questionCorrect[countQ])
@@ -444,6 +452,7 @@ $(document).ready(function(){
 		}
 		else {
 			countQ+=1
+			$(".question-number").text(countQ+1)
 			//if (countQ==0){countQ+= 1}
 			//countQ += 1
 			changeQuestion()

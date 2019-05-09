@@ -92,7 +92,12 @@ def changeLetterToText(questionResult):
         d["Correct_answer_choice"] = caResult
     return questionResult
 
-
+def changeFirstToOne(lst):
+    k = 1
+    for i in range(len(lst)):
+        lst[i][0] = k
+        k += 1
+    return lst
 
 answerList = readAnswers()
 numOfQuestions = getNumOfQuestions(answerList)
@@ -104,8 +109,8 @@ sortedIncorrectPool = getIncorrectList(sortedByLen)
 questionResult = changeLetterToText(readQuestions())
 incorrectList = separateAnswerList(sortedIncorrectPool,numOfQuestions)
 
-
-
+incorrectList = changeFirstToOne(incorrectList)
+correctList = changeFirstToOne(correctList)
 
 
 
@@ -135,15 +140,3 @@ with open('questionData.json','w') as f:
 
 # What it is: This file contains all the information we can get from the question.csv.
 # Format: an array,containing all the objects (corresponding to each answer), each object has key and value pair, such like (key: Question ID, value: 1)
-
-
-
-
-
-
-
-
-
-
-
-

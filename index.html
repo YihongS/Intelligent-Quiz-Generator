@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<!-- JS documents: Use jquery-csv -->
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script> -->
-	<script type="text/javascript" src="js/jquery.csv.min.js"></script>
+	<!-- <script type="text/javascript" src="js/jquery.csv.min.js"></script> -->
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<!-- <script type="text/javascript" src="python/answerData.json"></script> -->
     <script type="text/javascript" src="js/main.js"></script>
@@ -17,7 +17,8 @@
 <body>
 	<div class="wrapper">
 		<div id="scene-question" class = "scene">
-			<div class="questionPrompt">Microwaves are electric waves that could NOT penetrate?</div>
+			<div class="question-title">Question &nbsp<span class="question-number">0</span></div>
+			<div class="question-prompt">Microwaves are electric waves that could NOT penetrate?</div>
 			<div class="option-wrapper">
 				<span class="option-letter">A</span>
 				<span id="optionA" class="option">Food</span>
@@ -34,12 +35,10 @@
 				<span class="option-letter">D</span>
 				<span id="optionD" class="option">Metal</span>
 			</div>
-
-			<button class="btn_submit" data-next="#scene-feedback">submit</button>
-			<button class="btn_newQ tooltip">
-				This question seems off, I want a new one.
-				<span class="tooltiptext">you can request this 5 times</span>
-			</button>
+			<div class="button-wrapper">
+				<button class="btn_submit" data-next="#scene-feedback">submit</button>
+				<button class="btn_newQ tooltip">This question seems off, I want a new one.<span class="tooltiptext">you can request this 5 times</span></button>
+			</div>
 			<p class="game-system">You have requested for new questions too many times, please try to solve the question.</p>
 		</div>
 		<div id="scene-feedback" class = "scene">
