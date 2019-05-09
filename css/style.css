@@ -91,6 +91,12 @@ button{
 	border-color: #0F1A59;
 }
 
+.btn_disabled{
+	background-color: grey;
+	border-color: grey;
+	cursor: default;
+}
+
 .feedback{
 	margin: 10px auto;
 	text-align: center;

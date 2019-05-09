@@ -73,6 +73,7 @@ $(document).ready(function(){
 		$(".game-system").hide()
 		$(".feedback-wrapper").empty()
 		$(".feedback-wrapper").append("<div class = 'feedback correctness'>initialized feedback</div>")
+		$('.btn_submit').prop('disabled', true).addClass("btn_disabled");
 	}
 
 	function changeQuestion(){
@@ -125,6 +126,10 @@ $(document).ready(function(){
 				$(this).addClass('checked')
 			}
 			console.log(optionChose);
+			if (optionChose) {
+				$('.btn_submit').prop('disabled', false).removeClass("btn_disabled");
+
+			}
 		}
 		else{
 			console.log("cannot change options now")
