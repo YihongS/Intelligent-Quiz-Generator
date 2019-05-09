@@ -1,18 +1,23 @@
+html{
+	font-family: "muli",sans-serif;
+}
+
 .wrapper{
 	width:1120px;
-	height:800px;
-	margin:200px auto;
-	background: grey;
+	min-height:800px;
+	margin:50px auto;
+	background: #E8E8E8;
 }
 
 button {
   margin:10px;
   outline:none;
   font-color: black;
+	font-size: 1em;
 	border-color: grey;
 }
 .scene{
-	padding:100px;
+	padding:50px 100px 20px 100px;
 	/* background-color: grey; */
 	/* margin: 50px auto; */
 }
@@ -25,6 +30,10 @@ button {
 .question-title{
 	display: flex;
   justify-content: center;
+	font-size: 1.5em;
+	font-weight: bold;
+	color:#0F1A59;
+	font-family: "Merriweather"
 }
 
 .button-wrapper{
@@ -45,6 +54,32 @@ button{
 	cursor: pointer;
 }
 
+.btn_newQ{
+	width: 400px;
+}
+
+.btn_submit{
+	font-weight: bold;
+	color:#ffffff;
+	font-family: "Merriweather";
+	background-color: #0F1A59;
+	border-color: #0F1A59;
+}
+
+.feedback{
+	margin: 10px auto;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+}
+
+.btn_next_question{
+	margin: 10px auto;
+	text-align:center;
+	display: flex;
+	justify-content: center;
+}
+
 .option-wrapper{
 	width: 800px;
 	min-height: 50px;
@@ -54,8 +89,9 @@ button{
   border: 2px solid grey;
   background: white;
   cursor: pointer;
-	text-align: center;
+	/* text-align: center; */
 	justify-content: center;
+	padding: 10px 20px;
   /* vertical-align: middle; */
 	/* flex-direction: column; */
 	align-items: center;
@@ -64,7 +100,7 @@ button{
 }
 
 .option-letter{
-	/* margin:10px 0; */
+	margin-right:10px;
 	display: flex inline-block;
 }
 .option {
@@ -83,6 +119,10 @@ button{
 	border: 2px solid;
 }
 
+.border{
+	border: 3px solid;
+}
+
 .correct-choice{
 	/* background-color: green; */
 	border-color: green;
@@ -91,10 +131,6 @@ button{
 .incorrect-choice{
 	/* background-color: red; */
 	border-color: red;
-}
-
-.border{
-	border: 3px solid;
 }
 
 .tooltip {

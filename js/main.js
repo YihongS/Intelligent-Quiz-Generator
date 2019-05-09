@@ -154,8 +154,9 @@ $(document).ready(function(){
 	}
 
 	function hideSubmit(){
-		$(".btn_submit").hide()
+		// $(".btn_submit").hide()
 		$(".btn_newQ").hide()
+		$(".button-wrapper").hide()
 	}
 
 	function giveFeedback(){
@@ -166,7 +167,7 @@ $(document).ready(function(){
 			$('.correctness').text('Correct! Your hardwork of studying has paid off, now let’s go on to the next question! Keep up with the good rhythm!')
 		}
 		else {
-			$('.correctness').text("Not correct. Let's try again! Do you know that your brain will become stronger when you practivce it? Keep up with the good rhythm!")
+			$('.correctness').text("Not correct. Let's try again! \nDo you know that your brain will become stronger when you practivce it? Keep up with the good rhythm!")
 			correctiveFeedbacks()
 		}
 	}
@@ -177,17 +178,17 @@ $(document).ready(function(){
 		let incorrect = choseOptionNotCorrectLetters.join(", ")
 		if (correct) {
 			if (correctOptionNotChoseLetters.length == 1) {
-				$('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct option " + correct + "</p>")
+				$('.correctness').append("<p class = 'feedback corrective-correct'>\nYou didn't choose the correct option " + correct + "</p>")
 			} else {
-				$('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct options " + correct + "</p>")
+				$('.correctness').append("<p class = 'feedback corrective-correct'>\nYou didn't choose the correct options " + correct + "</p>")
 			}
 			// $('.correctness').append("<p class = 'feedback corrective-correct'>You didn't choose the correct option(s) " + correct + "</p>")
 		}
 		if (incorrect) {
 			if (choseOptionNotCorrectLetters.length == 1) {
-				$('.correctness').append("<p class = 'feedback corrective-wrong'>the option " + incorrect + " you chose is wrong</p>")
+				$('.correctness').append("<p class = 'feedback corrective-wrong'>\nthe option " + incorrect + " you chose is wrong</p>")
 			} else {
-				$('.correctness').append("<p class = 'feedback corrective-wrong'>the options " + incorrect + " you chose are wrong</p>")
+				$('.correctness').append("<p class = 'feedback corrective-wrong'>\nthe options " + incorrect + " you chose are wrong</p>")
 			}
 			// $('.correctness').append("<p class = 'feedback corrective-wrong'>the option(s) " + incorrect + " you chose is/are wrong</p>")
 		}
@@ -196,11 +197,11 @@ $(document).ready(function(){
 	function changeOptionColors() {
 		$('.option').each(function(){
 			if (correctOptions.includes($(this).text())) {
-				$(this).addClass("correct-choice")
+				$(this).parent(".option-wrapper").addClass("correct-choice")
 				// console.log($(this).text()+'is the correct choice')
 			}
 			else{
-				$(this).addClass("incorrect-choice")
+				$(this).parent(".option-wrapper").addClass("incorrect-choice")
 			}
 		})
 	}
@@ -458,7 +459,7 @@ $(document).ready(function(){
 			changeQuestion()
 		}
 		//@@@@@@ kexin0506
-		$(".btn_submit").fadeIn()
+		$(".button-wrapper").fadeIn()
 		if (timeClicked <= 3) {
 			$(".btn_newQ").fadeIn()
 		}
