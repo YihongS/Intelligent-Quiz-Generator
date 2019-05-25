@@ -2,7 +2,7 @@
 
 This is an intelligent quiz question generator for the Tools for Online Learning course at Carnegie Mellon University. 
 
-It allows students to ratake the question several times and get feedback. The retaking options are automatedly generated from previous students' self-explanation responses and are filtered and sorted by our models. This intelligent quiz generator allows learners to practice and get feedback on the knowledge they have't mastered while not increasing teacher's effort on producing new questions.
+It allows students to ratake a set of questions several times and get feedback. The retaking options are automatedly generated from previous students' self-explanation responses and are filtered and sorted by our models. This intelligent quiz generator allows learners to practice and get feedback on the knowledge they have't mastered while not increasing teacher's effort on producing new questions.
 
 Try the intelligent quiz generator with a sample set of questions here: https://github.com/YihongS/TOLQuizGenerator
 
