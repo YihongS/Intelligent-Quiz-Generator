@@ -6,12 +6,12 @@ It allows students to ratake a set of questions several times and get feedback. 
 
 Try the intelligent quiz generator with a sample set of questions here: https://github.com/YihongS/TOLQuizGenerator
 
-## Learn about our models behind retaking - Where each code lives:
+## Learn about our models behind the retaking mechanism - Where each code lives:
 The responses sorting function is written in Python, please find the main.py file in the "pyhton" folder.
 
 The question retaking functions are written in Javascript, please find the main.js file in the "js" folder.
 
-## If you want to use your own questions in the smart quiz generator, please:
+## If you want to use your own questions in the intelligent quiz generator, please:
 
 1. Put your csv files (usually a question file and an answer file) under the "python" folder, refering to the format of the sample question and answer files.
 
