@@ -1,4 +1,4 @@
-# TOLQuizGenerator
+# Intelligent Quiz Generator
 
 This is an intelligent quiz question generator for the Tools for Online Learning course at Carnegie Mellon University. 
 
